@@ -119,12 +119,9 @@ public class Main {
 		
 		
 		//-----------------------------------------------------------------------
-		int totalSeats = events.getTotalSeats();
-		int remainSeats = totalSeats;
-		if(seatsBook == 0) {
-			remainSeats = totalSeats - seatsBook;
-		}
 		
+		int totalSeats = events.getTotalSeats();
+		int remainSeats = totalSeats - seatsBook + seatsDismiss;
 		
 		//-----------------------------------------------------------------------
 		
