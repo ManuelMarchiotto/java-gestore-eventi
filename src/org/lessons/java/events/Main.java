@@ -11,6 +11,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		
+				
 		//inizializzo lo scanner-----------------
 		Scanner scanner = new Scanner(System.in);
 		//---------------------------------------
@@ -78,40 +79,55 @@ public class Main {
 		//verifico cosa vuole fare l'utente se prenotare o cancellare prenotazione
 		int i = 0;
 		String action;
-		int people;
+		int peopleBook;
 		int peopleDismiss;
-		
-		
-		while(i != 10 && ok == true){
+		int seatsBook = 0;
+		int seatsDismiss = 0;
+			
+		while(i != 1 && ok == true){
 			System.out.println("prenota, disidici o fine?");
 			action = scanner.nextLine();
 			
 				if(action.compareToIgnoreCase(firstAction) == 0) {
 					System.out.println("Quante persone ci saranno?");
-					people = scanner.nextShort();
-					
-					numberPeople = numberPeople + people;
+					peopleBook = scanner.nextShort();
+					seatsBook = seatsBook + peopleBook;
 				}else if(action.compareToIgnoreCase(secondAction) == 0) {
 					System.out.println("Quante persone ci disdicono?");
 					peopleDismiss = scanner.nextShort();
-					
-			        numberPeople = numberPeople - peopleDismiss;
+			        seatsDismiss = seatsDismiss + peopleDismiss;
 				}else if(action.compareToIgnoreCase(endAction) == 0) {
 					System.out.println("si");
-					i = 10;
+					i = 1;
 					
 					//break;
 				}
 				
 		}
-
-		
-		
 		//------------------------------------------------------------------------
+		
+		numberPeople = seatsBook - seatsDismiss;
 		
 	
 		//dichiaro l'oggetto evento---------------------------------------
+		
 		Evento events = new Evento(title, date, 100, numberPeople);
+		
+		//-----------------------------------------------------------------------
+		
+		
+		
+		
+		//-----------------------------------------------------------------------
+		int totalSeats = events.getTotalSeats();
+		int remainSeats = totalSeats;
+		if(seatsBook == 0) {
+			remainSeats = totalSeats - seatsBook;
+		}
+		
+		
+		//-----------------------------------------------------------------------
+		
 		
 		//stampo in console il risultato di quello che l'utente ha scritto
 		System.out.println("-------Evento--------");
@@ -119,6 +135,7 @@ public class Main {
 		System.out.println(events.getDate());			
 		System.out.println(events.getBookedSeats());
 		System.out.println(events.getTotalSeats());
+		System.out.println(remainSeats);
 		System.out.println("-----Fine Evento-----");
 		//-----------------------------------------------------------------
 		
