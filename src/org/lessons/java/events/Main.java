@@ -110,7 +110,7 @@ public class Main {
 
 		//-------------------------------------------------------------------------
 		
-		//------Calcolo dei posti rimanenti----------------------------------------
+		//------Calcolo dei posti prenotati----------------------------------------
 		numberPeople = seatsBook - seatsDismiss;
 		//-------------------------------------------------------------------------
 		 
@@ -122,7 +122,7 @@ public class Main {
 		
 		Evento events = new Evento(title, date, 100, numberPeople);
 		
-		Concerto concert = new Concerto(title, date, 100, numberPeople, formattedDate , "100");
+		Concerto concert = new Concerto(title, date, 100, numberPeople, formattedDate , 100.0F);
 		
 		//------------------------------------------------------------------------
 		
@@ -147,6 +147,7 @@ public class Main {
 		
 		System.out.println("-------Evento--------");
 		System.out.println(concert.hourPriceTitleFormatted());
+		System.out.println(concert.hourPriceTitleFormatted2());
 		System.out.println("---------------------");
 		//-----------------------------------------------------------------
 		
