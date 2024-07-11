@@ -4,6 +4,9 @@ import java.util.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
 
@@ -50,7 +53,6 @@ public class Main {
         //---------------------------------------------------------------------------
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //Date date1 = sdf.parse("2024-07-08");
         Date date1 = d;
         Date date2 = date;
         boolean ok = false ;
@@ -111,10 +113,16 @@ public class Main {
 		//------Calcolo dei posti rimanenti----------------------------------------
 		numberPeople = seatsBook - seatsDismiss;
 		//-------------------------------------------------------------------------
-	
+		 
+		LocalDateTime date3 = LocalDateTime.now();
+	    DateTimeFormatter myFormatObj  = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = date3.format(myFormatObj );
+		
 		//-------------dichiaro l'oggetto evento-----------------------------------
 		
 		Evento events = new Evento(title, date, 100, numberPeople);
+		
+		Concerto concert = new Concerto(title, date, 100, numberPeople, formattedDate , "100");
 		
 		//------------------------------------------------------------------------
 		
@@ -131,9 +139,14 @@ public class Main {
 		System.out.println("-------Evento--------");
 		System.out.println(events.getTitle());			
 		System.out.println(events.getDate());			
-		System.out.println(events.getBookedSeats());
-		System.out.println(events.getTotalSeats());
-		System.out.println(remainSeats);
+		System.out.println("questi sono i posti totali: " + events.getTotalSeats());
+		System.out.println("questi sono i posti prenotati: " + events.getBookedSeats());
+		System.out.println("questi sono i posti che rimangono: " + remainSeats);
+		System.out.println("---------------------");
+		
+		
+		System.out.println("-------Evento--------");
+		System.out.println(concert.hourPriceTitleFormatted());
 		System.out.println("---------------------");
 		//-----------------------------------------------------------------
 		
