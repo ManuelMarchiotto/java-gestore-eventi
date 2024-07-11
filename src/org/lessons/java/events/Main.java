@@ -12,27 +12,27 @@ public class Main {
 		
 		
 				
-		//inizializzo lo scanner-----------------
+		//inizializzo lo scanner---------------------------------------------------
 		Scanner scanner = new Scanner(System.in);
-		//---------------------------------------
+		//--------------------------------------------------------------------------
 		
-		//dichiaro le variabili per chiedere all'utente le informazioni
+		//dichiaro le variabili per chiedere all'utente le informazioni--------------
 		String title;
 		Date date = null;
 		int numberPeople = 0;
 		int numberDismiss = 0;
-		//-------------------------------------------------------------
+		//--------------------------------------------------------------------------
 		
 		
-		//sistema per chiedere all'utente di scrivere le varie variabili
+		//sistema per chiedere all'utente di scrivere le varie variabili------------
 		
-		// Date d = new Date();
+		Date d = new Date();
 		String s;
 
 		System.out.println("Dimmi il titolo dell'evento?");
 		title = scanner.nextLine();
 		 // si procura la data sotto forma di una stringa nel formato SHORT
-        System.out.println("Inserisci la data [mm/gg/yyyy]: ");
+        System.out.println("Inserisci la data [gg/mm/yyyy]: ");
         Scanner in = new Scanner(System.in);
         s = in.nextLine();
         // converte la stringa della data in un oggetto di classe Date
@@ -45,12 +45,13 @@ public class Main {
             System.out.println("Formato data non valido.");
         }
 
-		//---------------------------------------------------------------
+		//----------------------------------------------------------------------------
         
         //---------------------------------------------------------------------------
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = sdf.parse("2024-07-08");
+        //Date date1 = sdf.parse("2024-07-08");
+        Date date1 = d;
         Date date2 = date;
         boolean ok = false ;
         
@@ -67,57 +68,57 @@ public class Main {
         
         //--------------------------------------------------------------------------
         
-        
-		//-----variabili di appoggio per verifica cosa vuole fare l'utente-------
-		
-		String firstAction = "prenota";
-		String secondAction = "disdici";
-		String endAction ="fine";
-		
-		//-----------------------------------------------------------------------
 		
 		//verifico cosa vuole fare l'utente se prenotare o cancellare prenotazione
-		int i = 0;
-		String action;
 		int peopleBook;
 		int peopleDismiss;
 		int seatsBook = 0;
 		int seatsDismiss = 0;
 			
-		while(i != 1 && ok == true){
-			System.out.println("prenota, disidici o fine?");
-			action = scanner.nextLine();
+		while(true && ok == true){
+			System.out.println("cosa vuoi fare: 1 -> Prenotare, 2 -> Disdire, 3 -> Fine ?");
+			int action = scanner.nextInt();
+				
+			if(action == 3) {
+				break;
+			}
 			
-				if(action.compareToIgnoreCase(firstAction) == 0) {
+			switch(action) {
+				case 1:
 					System.out.println("Quante persone ci saranno?");
 					peopleBook = scanner.nextShort();
 					seatsBook = seatsBook + peopleBook;
-				}else if(action.compareToIgnoreCase(secondAction) == 0) {
-					System.out.println("Quante persone ci disdicono?");
-					peopleDismiss = scanner.nextShort();
-			        seatsDismiss = seatsDismiss + peopleDismiss;
-				}else if(action.compareToIgnoreCase(endAction) == 0) {
-					System.out.println("si");
-					i = 1;
-					
-					//break;
+					break;
+			
+				case 2:
+					if(seatsBook > 0) {
+						System.out.println("Quante persone disdicono?");
+						peopleDismiss = scanner.nextShort();
+						if(peopleDismiss <= seatsBook) {
+							seatsDismiss = seatsDismiss + peopleDismiss;
+						}else {
+							System.out.println("Non puoi puoi disdire piu posti di quelli prenotati");
+						}
+					}else {
+						System.out.println("Non ci sono prenotazioni non puoi disdire!");	
+					}
+					break;
 				}
-				
-		}
-		//------------------------------------------------------------------------
+			}
+
+		//-------------------------------------------------------------------------
 		
+		//------Calcolo dei posti rimanenti----------------------------------------
 		numberPeople = seatsBook - seatsDismiss;
-		
+		//-------------------------------------------------------------------------
 	
-		//dichiaro l'oggetto evento---------------------------------------
+		//-------------dichiaro l'oggetto evento-----------------------------------
 		
 		Evento events = new Evento(title, date, 100, numberPeople);
 		
-		//-----------------------------------------------------------------------
+		//------------------------------------------------------------------------
 		
-		
-		
-		
+
 		//-----------------------------------------------------------------------
 		
 		int totalSeats = events.getTotalSeats();
@@ -133,7 +134,7 @@ public class Main {
 		System.out.println(events.getBookedSeats());
 		System.out.println(events.getTotalSeats());
 		System.out.println(remainSeats);
-		System.out.println("-----Fine Evento-----");
+		System.out.println("---------------------");
 		//-----------------------------------------------------------------
 		
 	}
